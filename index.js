@@ -11,6 +11,7 @@ import connectionRouter from './routes/connection.routes.js';
 import http from 'http'
 import { Server } from 'socket.io';
 import notificationRouter from './routes/notification.routes.js';
+import messageRouter from './routes/message.routes.js';
 
 let app = express();
 
@@ -35,16 +36,30 @@ app.use("/api/user", userRouter);
 app.use("/api/post", postRouter);
 app.use("/api/connection", connectionRouter);
 app.use("/api/notification", notificationRouter);
+app.use("/api/message", messageRouter);
 
-export const userShocketMap = new Map();
+export const userShocketMap = new Map(); // userId -> socket.id (also doubles as our "online users" list)
+const socketUserMap = new Map();          // socket.id -> userId (needed to know who disconnected)
 
 io.on("connection", (socket) => {
     socket.on("register", (userId) => {
         userShocketMap.set(userId, socket.id);
+        socketUserMap.set(socket.id, userId);
+
+        // tell everyone this user just came online, and tell THIS user who else is already online
+        io.emit("userOnline", userId);
+        socket.emit("onlineUsers", Array.from(userShocketMap.keys()));
+
         console.log(userShocketMap);
     })
 
     socket.on("disconnect", () => {
+        let userId = socketUserMap.get(socket.id);
+        if (userId) {
+            userShocketMap.delete(userId);
+            socketUserMap.delete(socket.id);
+            io.emit("userOffline", userId);
+        }
     })
 })
 
