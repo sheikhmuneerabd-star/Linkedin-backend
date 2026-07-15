@@ -17,14 +17,14 @@ let app = express();
 let server = http.createServer(app);
 export const io = new Server(server, {
     cors: ({
-        origin: "https://muneer-social-app.netlify.app",
+        origin: "http://localhost:5173",
         credentials: true
     })
 })
 
 let port = process.env.PORT;
 app.use(cors({
-    origin: "https://muneer-social-app.netlify.app",
+    origin: "http://localhost:5173",
     credentials: true
 }))
 app.use(express.json());
@@ -51,10 +51,4 @@ io.on("connection", (socket) => {
 server.listen(port, () => {
     connectDb();
     console.log("server is started...");
-<<<<<<< HEAD
 })
-=======
-})
-
-export default app;
->>>>>>> 83b006a1022ed0409e52633c275199bdc8a9c666
