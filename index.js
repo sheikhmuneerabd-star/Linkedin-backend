@@ -66,3 +66,5 @@ server.listen(port, () => {
     connectDb();
     console.log("server is started...");
 })
+
+export default app;
