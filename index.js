@@ -18,14 +18,14 @@ let app = express();
 let server = http.createServer(app);
 export const io = new Server(server, {
     cors: ({
-        origin: "https://singular-cactus-9069e4.netlify.app",
+        origin: "https://linkconnect-network.netlify.app",
         credentials: true
     })
 })
 
 let port = process.env.PORT;
 app.use(cors({
-    origin: "https://singular-cactus-9069e4.netlify.app",
+    origin: "https://linkconnect-network.netlify.app",
     credentials: true
 }))
 app.use(express.json());
