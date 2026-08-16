@@ -18,14 +18,14 @@ let app = express();
 let server = http.createServer(app);
 export const io = new Server(server, {
     cors: ({
-        origin: "https://linkconnect-network.netlify.app",
+        origin: ["https://linkconnect-network.netlify.app", "https://linkedin-frontend-three.vercel.app"],
         credentials: true
     })
 })
 
 let port = process.env.PORT;
 app.use(cors({
-    origin: "https://linkconnect-network.netlify.app",
+    origin: ["https://linkconnect-network.netlify.app", "https://linkedin-frontend-three.vercel.app"],
     credentials: true
 }))
 app.use(express.json());
