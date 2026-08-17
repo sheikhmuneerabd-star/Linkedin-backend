@@ -15,17 +15,22 @@ import messageRouter from './routes/message.routes.js';
 
 let app = express();
 
+const allowedOrigins = [
+  "https://linkconnect-network.netlify.app",
+  "https://linkedin-frontend-three.vercel.app"
+];
+
 let server = http.createServer(app);
 export const io = new Server(server, {
     cors: ({
-        origin: "singular-cactus-9069e4.netlify.app",
+        origin: "https://linkedin-frontend-three.vercel.app",
         credentials: true
     })
 })
 
 let port = process.env.PORT;
 app.use(cors({
-    origin: "singular-cactus-9069e4.netlify.app",
+    origin: "https://linkedin-frontend-three.vercel.app",
     credentials: true
 }))
 app.use(express.json());
