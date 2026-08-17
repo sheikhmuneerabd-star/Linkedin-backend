@@ -15,11 +15,6 @@ import messageRouter from './routes/message.routes.js';
 
 let app = express();
 
-const allowedOrigins = [
-  "https://linkconnect-network.netlify.app",
-  "https://linkedin-frontend-three.vercel.app"
-];
-
 let server = http.createServer(app);
 export const io = new Server(server, {
     cors: ({
