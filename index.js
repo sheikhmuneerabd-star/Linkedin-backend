@@ -18,14 +18,14 @@ let app = express();
 let server = http.createServer(app);
 export const io = new Server(server, {
     cors: ({
-        origin: "https://linkedin-frontend-three.vercel.app",
+        origin: "singular-cactus-9069e4.netlify.app",
         credentials: true
     })
 })
 
 let port = process.env.PORT;
 app.use(cors({
-    origin: "https://linkedin-frontend-three.vercel.app",
+    origin: "singular-cactus-9069e4.netlify.app",
     credentials: true
 }))
 app.use(express.json());
